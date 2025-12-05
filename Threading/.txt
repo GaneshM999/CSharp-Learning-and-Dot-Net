@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Threading
+{
+    class threadprperties
+    {
+        /*  public static void t1() // this is single thread models.
+          {
+              long count = 0;
+              for (int i = 0; i < 10000000; i++)
+              {
+                  count++;
+
+              }
+              Console.WriteLine("t1:" + count);
+
+          }
+          public static void t2()
+          {
+              long count = 0;
+              for (int i = 0; i < 1000000000; i++)
+              {
+                  count++;
+
+              }
+              Console.WriteLine("t2:" + count);
+
+          }
+          public static void Main()
+          {
+              Stopwatch s = new Stopwatch();
+              s.Start();
+              t1();
+              t2();
+              s.Stop();
+              Console.WriteLine("time taken:" + s.ElapsedMilliseconds);
+          }*/
+
+
+
+        public static void t1() // this is multy thread models.
+        {
+            long count = 0;
+            for (int i = 0; i < 10000000; i++)
+            {
+                count++;
+
+            }
+            Console.WriteLine("t1:" + count);
+
+        }
+        public static void t2()
+        {
+            long count = 0;
+            for (int i = 0; i < 1000000000; i++)
+            {
+                count++;
+
+            }
+            Console.WriteLine("t2:" + count);
+
+        }
+        public static void Main()
+        {
+            Thread tt1 = new Thread(t1);
+            Thread tt2 = new Thread(t2);
+            Stopwatch s = new Stopwatch();
+            Stopwatch s1 = new Stopwatch();
+
+            s1.Start();
+              t1();
+               t2();                            //comparing the single and multy thread models.
+            s1.Stop();
+
+            s.Start();
+            tt1.Start();
+            tt2.Start();
+            s.Stop();
+            tt1.Join();
+            tt2.Join();
+            Console.WriteLine("time taken SINGLE:" + s1.ElapsedMilliseconds);
+            Console.WriteLine("time taken MULTY:" + s.ElapsedMilliseconds);
+        }
+    }
+
+}
